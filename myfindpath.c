@@ -11,11 +11,11 @@ int find_path (int matrix[][12] , int x , int y){
 	int counter = 0 ;
 	int c_move = 0 ;
 	
-	if ( matrix [x + 1][y] == 1)                   //Güneyde 1 mevcut ise , counterı döndürür.
+	if ( matrix [x + 1][y] == 1)                   
 		counter = d_move(matrix , x , y , c_move );
 		
 	else if ( matrix [x][y + 1] == 1)
-		counter = r_move(matrix , x , y , c_move); // Doğuda 1 mevcut ise , counterı döndürür.
+		counter = r_move(matrix , x , y , c_move); 
 		
 	return counter;
 		
@@ -23,33 +23,32 @@ int find_path (int matrix[][12] , int x , int y){
 int d_move(int d_path [][12] , int d1 , int d2 , int d_count){
 	
 	
-	if(d1 == 5) // Fonksiyonda aşağı hareketi kontrol ettirdiğimiz için ,
-		return 0;  // Eğer satırda son satırdaysak , 0 döndürür.
+	if(d1 == 5) 
+		return 0;  
 	if(d1 + 1 == 5 && d2 == 11) {
-		printf("%d  step is the shortest path  \n" , d1 + 1); // Sağ alt köşeye geldiğinde gidecek başka yolu kalmamıştır.İstediğimiz noktaya vardık.
+		printf("%d  step is the shortest path  \n" , d1 + 1); 
 		return 1;
 	}
-	if (d_path [d1 + 2][d2] != 1 && d_path [d1 + 1][d2 + 1] != 1 && d_path [d1 + 1][d2 - 1] != 1 ) //  Bulunduğumuz yerdeki tüm engel olabilecek engelleri hesaplatıyoruz.
+	if (d_path [d1 + 2][d2] != 1 && d_path [d1 + 1][d2 + 1] != 1 && d_path [d1 + 1][d2 - 1] != 1 ) 
+		return 0; // EÃ°er koÃ¾ullar saÃ°lanmÃ½yorsa 0 dÃ¶nÃ¼yor.
 	
-		return 0; // Eğer koşullar sağlanmıyorsa 0 dönüyor.
-	
-	d1++; d_count++; // Aşağı hareketi kontrol ettirdiğimizden yine bu koşulları sağladığını görmek için satır aşağı iner. d1 artar. d_count adım sayısı.
+	d1++; d_count++; 
 
-	if (d_path [d1 + 1][d2] == 1) //  Bir alt satırı kontrol eder ve eğer ....
-		if(d_move(d_path ,d1 ,d2 ,d_count) > 0){ // ... satırda yol mevcut ise 0 dan büyük değerdir , ve yol vardır. Yazdırırız.
+	if (d_path [d1 + 1][d2] == 1) .
+		if(d_move(d_path ,d1 ,d2 ,d_count) > 0){ 
 			printf("%d,%d\n",d1,d2);
 		return d_count;  
 		}
 	
 	
-	if (d_path [d1][d2 + 1] == 1) // Aşağıya inerken sağdan  mı soldan mı devam edecek ? Sağda mevcut yol varsa yazdırırız.
+	if (d_path [d1][d2 + 1] == 1) 
 		if(r_move(d_path ,d1 ,d2 ,d_count) > 0){
 			printf("%d,%d\n",d1,d2);
 			return d_count;
 		}
 			
 	
-	if (d_path [d1][d2 - 1] == 1) // Aşağıya inerken sağdan  mı soldan mı devam edecek ? Salda mevcut yol varsa yazdırırız.
+	if (d_path [d1][d2 - 1] == 1) 
 		if(l_move(d_path ,d1 ,d2 ,d_count) > 0){
 			printf("%d,%d\n",d1,d2);
 		return d_count;
@@ -62,9 +61,9 @@ int d_move(int d_path [][12] , int d1 , int d2 , int d_count){
 int r_move(int r_path [][12] ,int r1 ,int r2 ,int r_count )
 {
 	
-	if (r2 == 11) // Sütun sayısı 11 olduğunda sağa  hareket hakkı kalmadı.
+	if (r2 == 11) 
 		return 0 ;
-	if (r1 == 5 && r2 + 1 == 11){ // Son hareket sınırına ulaştık. Kısa yolu yazdırabiliriz.
+	if (r1 == 5 && r2 + 1 == 11){ 
 		printf("%d  step is the shortest path \n", ++r_count) ; 
 			return 1;
 	}
@@ -159,13 +158,13 @@ int u_move(int u_path [][12] ,int u1 ,int u2 ,int u_count )
 }
 	
 int main(){
-	int a = 0 , b = 0 , m , n; // yol yazdırılırken kullanılacak , a satırı b sütunu temsil ediyor.
+	int a = 0 , b = 0 , m , n; 
 	int myMatrix[6][12] = {{1,0,1,1,1,0,0,1,0,1,1,0}
-						, {1,0,1,1,1,1,1,0,1,0,0,0} 
-						, {1,1,1,1,1,1,1,0,1,0,1,0}
-						, {0,1,0,1,0,1,0,1,1,1,1,1} 
-						, {0,1,0,1,1,1,1,1,0,0,0,1} 
-						, {1,1,1,0,1,1,1,1,1,1,1,1}};
+			    , {1,0,1,1,1,1,1,0,1,0,0,0} 
+			    , {1,1,1,1,1,1,1,0,1,0,1,0}
+	             	    , {0,1,0,1,0,1,0,1,1,1,1,1} 
+			    , {0,1,0,1,1,1,1,1,0,0,0,1} 
+			    , {1,1,1,0,1,1,1,1,1,1,1,1}};
 	for(m = 0; m < 6; m++){
 		for( n = 0; n < 12; n++){
 			printf("%d " , myMatrix[m][n]);
@@ -173,7 +172,7 @@ int main(){
 	
 	printf("\n ");
 	}
-	find_path(myMatrix , a , b); // Matrixi 0,0 noktasindan baslatiyor.
+	find_path(myMatrix , a , b); 
 
 }
 
